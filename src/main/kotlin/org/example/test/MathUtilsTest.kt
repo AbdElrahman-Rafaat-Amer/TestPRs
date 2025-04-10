@@ -26,7 +26,7 @@ fun assertEquals(expected: Any, actual: Any, message: String = "") {
 }
 
 private fun testAddNumbers(mathUtils: MathUtils) {
-    assertEquals(5, mathUtils.addNumbers(2, 3), "Adding positive numbers")
+    assertEquals(50, mathUtils.addNumbers(2, 3), "Adding positive numbers")
     assertEquals(-2, mathUtils.addNumbers(-1, -1), "Adding negative numbers")
     assertEquals(0, mathUtils.addNumbers(0, 0), "Adding zeros")
 }

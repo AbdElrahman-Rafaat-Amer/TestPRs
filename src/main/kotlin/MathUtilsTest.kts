@@ -1,4 +1,5 @@
-package org.example
+import org.example.addNumbers
+import org.example.subtractNumbers
 
 fun runAllTests() {
     val tests = listOf(

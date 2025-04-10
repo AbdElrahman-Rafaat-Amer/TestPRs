@@ -32,3 +32,6 @@ private fun testSubtractNumbers() {
     assertEquals(0, subtractNumbers(-1, -1), "Adding negative numbers")
     assertEquals(0, subtractNumbers(0, 0), "Adding zeros")
 }
+
+private fun addNumbers(a: Int, b: Int) = a + b
+private fun subtractNumbers(a: Int, b: Int) = a - b

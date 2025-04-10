@@ -1,11 +1,11 @@
 package org.example
 
 // File: MathUtils.kt
-fun addNumbers(a: Int, b: Int): Int {
+private fun addNumbers(a: Int, b: Int): Int {
     return a + b
 }
 
-fun subtractNumbers(a: Int, b: Int): Int {
+private fun subtractNumbers(a: Int, b: Int): Int {
     return a - b
 }
 

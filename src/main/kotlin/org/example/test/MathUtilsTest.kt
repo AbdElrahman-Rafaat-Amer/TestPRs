@@ -32,7 +32,7 @@ private fun testAddNumbers(mathUtils: MathUtils) {
 }
 
 private fun testSubtractNumbers(mathUtils: MathUtils) {
-    assertEquals(5, mathUtils.subtractNumbers(2, 3), "Subtract positive numbers")
+    assertEquals(-1, mathUtils.subtractNumbers(2, 3), "Subtract positive numbers")
     assertEquals(0, mathUtils.subtractNumbers(-1, -1), "Subtract negative numbers")
     assertEquals(0, mathUtils.subtractNumbers(0, 0), "Subtract zeros")
 }

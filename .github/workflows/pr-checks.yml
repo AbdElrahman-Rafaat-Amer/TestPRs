@@ -12,7 +12,8 @@ jobs:
 #        with:
 #          java-version: '17'
       - name: Run tests
-        run: kotlinc src/main/kotlin/org/example/MathUtilsTest.kt -include-runtime -d test.jar
+        #run: kotlinc src/main/kotlin/org/example/MathUtilsTest.kt -include-runtime -d test.jar
+        run: kotlinc src/main/kotlin/org/example/MathUtils.kt src/main/kotlin/org/example/test/MathUtilsTest.kt -include-runtime -d test.jar
 
       - name: Run tests Jar
         run:  java -jar test.jar || exit 1

@@ -5,6 +5,10 @@ fun addNumbers(a: Int, b: Int): Int {
     return a + b
 }
 
+fun subtractNumbers(a: Int, b: Int): Int {
+    return a - b
+}
+
 // File: MathUtilsTests.kt
 fun main() {
     testAddNumbers()
@@ -34,4 +38,13 @@ private fun testAddNumbers() {
     } else {
         println("PASS: 0 + 0 = 0")
     }
+
+    val sub1 = subtractNumbers(2, 3)
+    println("sub1 $sub1")
+
+    val sub2 = subtractNumbers(-1, -1)
+    println("sub2 $sub2")
+
+    val sub3 = subtractNumbers(0, 0)
+    println("sub3 $sub3")
 }

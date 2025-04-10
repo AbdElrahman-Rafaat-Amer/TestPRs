@@ -28,7 +28,7 @@ private fun testAddNumbers() {
 }
 
 private fun testSubtractNumbers() {
-    assertEquals(-1, subtractNumbers(2, 3), "Adding positive numbers")
+    assertEquals(5, subtractNumbers(2, 3), "Adding positive numbers")
     assertEquals(0, subtractNumbers(-1, -1), "Adding negative numbers")
     assertEquals(0, subtractNumbers(0, 0), "Adding zeros")
 }

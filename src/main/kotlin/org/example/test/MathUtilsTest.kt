@@ -2,21 +2,12 @@ package org.example.test
 
 import org.example.MathUtils
 
-
-fun runAllTests() {
+fun main() {
     val mathUtils = MathUtils()
-    val tests = listOf(
-        ::testAddNumbers,
-        ::testSubtractNumbers,
-    )
 
-    tests.forEach { test ->
-        println("\nRunning ${test.name}")
-        test(mathUtils)
-    }
+    testAddNumbers(mathUtils)
+    testSubtractNumbers(mathUtils)
 }
-
-fun main() = runAllTests()
 
 fun assertEquals(expected: Any, actual: Any, message: String = "") {
     if (expected != actual) {

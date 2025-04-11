@@ -14,7 +14,7 @@ jobs:
         uses: fwilhe2/setup-kotlin@0.2.0
         with:
           # Version of the compiler to download, if not provided a default value is used.
-          version: 1.4.30
+          version: 2.0.0
 
 
       - name: Build with Gradle

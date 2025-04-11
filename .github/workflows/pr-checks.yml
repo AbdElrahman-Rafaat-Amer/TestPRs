@@ -8,37 +8,28 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up JDK (required for Gradle)
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Run Gradle tests
+      - name: Set up Kotlin environment
         run: |
-          chmod +x ./gradlew
-          ./gradlew test
+          # Install Kotlin compiler
+          sudo apt-get update
+          sudo apt-get install -y kotlin
 
-      - name: Download dependencies
-        run: |
+          # Create libs directory for dependencies
           mkdir -p libs
-          cd libs
-          curl -L -O https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
-          cd ..
+          
+          # Download kotlinx-datetime dependency
+          curl -L -o libs/kotlinx-datetime.jar \
+            https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
 
-      - name: Run Gradle tests
+      - name: Compile and run tests
         run: |
-          chmod +x ./gradlew
-          ./gradlew test
-
-      - name: Compile with dependencies (non-Gradle)
-        run: |
+          # Compile main and test files with dependencies
           kotlinc \
             src/main/kotlin/org/example/MathUtils.kt \
             src/main/kotlin/org/example/test/MathUtilsTest.kt \
-            -cp libs/kotlinx-datetime-0.4.1.jar \
+            -cp libs/kotlinx-datetime.jar \
             -include-runtime \
             -d test.jar
-
-      - name: Run tests Jar (non-Gradle)
-        run: java -jar test.jar || exit 1
+          
+          # Run the tests
+          java -jar test.jar || exit 1

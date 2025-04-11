@@ -1,5 +1,6 @@
 package org.example.test
 
+import kotlinx.datetime.LocalDate
 import org.example.MathUtils
 
 
@@ -22,6 +23,7 @@ fun assertEquals(expected: Any, actual: Any, message: String = "") {
     if (expected != actual) {
         throw AssertionError("FAIL: $message. Expected $expected but got $actual")
     }
+    LocalDate.parse("2023-04-10")
     println("PASS: $message")
 }
 

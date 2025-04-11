@@ -43,3 +43,11 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+local.properties
+local.properties
+.idea/runConfigurations.xml
+.idea/misc.xml
+.idea/gradle.xml
+.idea/migrations.xml
+.idea/AndroidProjectSystem.xml
+.idea/caches/deviceStreaming.xml

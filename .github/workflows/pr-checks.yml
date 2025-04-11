@@ -8,6 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up environment
+        run: |
+          # Install latest Kotlin and JDK
+          curl -s https://get.sdkman.io | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install kotlin
+          sdk install java 17.0.10-tem
+          
       - name: Compile and test
         run: |
           kotlinc \

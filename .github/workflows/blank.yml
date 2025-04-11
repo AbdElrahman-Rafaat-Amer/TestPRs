@@ -17,11 +17,6 @@ jobs:
           version: 2.0.0
 
 
-      - name: Build with Gradle
-        # You may pin to the exact commit or the version.
-        # uses: gradle/actions@06832c7b30a0129d7fb559bcc6e43d26f6374244
-        uses: gradle/actions/dependency-submission
-
       - name: Gradle Android
         # You may pin to the exact commit or the version.
         # uses: Raul6469/android-gradle-action@b8fc7c7bde2562a4578b7e1bd996cc78d841638e

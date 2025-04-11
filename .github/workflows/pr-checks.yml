@@ -8,9 +8,41 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Kotlin compiler
+        run: |
+          curl -s https://get.sdkman.io | bash
+          echo "$HOME/.sdkman/bin/sdkman-init.sh" >> $GITHUB_ENV
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install kotlin
+
+      - name: Download dependencies
+        run: |
+          mkdir -p libs
+          curl -L -o libs/kotlinx-datetime.jar \
+            https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
+
+      - name: Grant execute permission for gradlew
+        if: exists('./gradlew')
+        run: chmod +x ./gradlew
+
+      - name: Run Gradle tests (if using Gradle)
+        if: exists('./gradlew')
+        run: ./gradlew test
 
       - name: Compile with dependencies
-        run: kotlinc src/main/kotlin/org/example/MathUtils.kt src/main/kotlin/org/example/test/MathUtilsTest.kt -include-runtime -d test.jar
+        run: |
+          kotlinc \
+            src/main/kotlin/org/example/MathUtils.kt \
+            src/main/kotlin/org/example/test/MathUtilsTest.kt \
+            -cp libs/kotlinx-datetime.jar \
+            -include-runtime \
+            -d test.jar
 
       - name: Run tests Jar
         run: java -jar test.jar || exit 1

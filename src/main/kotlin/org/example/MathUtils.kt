@@ -1,5 +1,7 @@
 package org.example
 
+import kotlinx.datetime.LocalDate
+
 class MathUtils {
     // File: MathUtils.kt
     fun addNumbers(a: Int, b: Int): Int {
@@ -12,6 +14,7 @@ class MathUtils {
 
     // File: MathUtilsTests.kt
     fun main() {
+        LocalDate.parse("3333333")
         testAddNumbers()
     }
 

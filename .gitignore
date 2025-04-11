@@ -51,3 +51,4 @@ local.properties
 .idea/migrations.xml
 .idea/AndroidProjectSystem.xml
 .idea/caches/deviceStreaming.xml
+test.jar

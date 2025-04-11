@@ -10,20 +10,24 @@ jobs:
 
       - name: Set up Kotlin environment
         run: |
-          # Install Kotlin compiler
-          sudo apt-get update
-          sudo apt-get install -y kotlin
-
+          # Install latest Kotlin compiler via SDKMAN
+          curl -s "https://get.sdkman.io" | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install kotlin
+          
+          # Verify Kotlin version (should be 1.9.x)
+          kotlin -version
+          
           # Create libs directory for dependencies
           mkdir -p libs
           
-          # Download kotlinx-datetime dependency
+          # Download compatible kotlinx-datetime
           curl -L -o libs/kotlinx-datetime.jar \
             https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
 
       - name: Compile and run tests
         run: |
-          # Compile main and test files with dependencies
+          # Compile with proper classpath
           kotlinc \
             src/main/kotlin/org/example/MathUtils.kt \
             src/main/kotlin/org/example/test/MathUtilsTest.kt \

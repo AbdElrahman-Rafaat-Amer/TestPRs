@@ -8,14 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
 
-      - name: Run tests
-      - name: Run gradle tests
-        run: ./gradlew test #Runs your project's unit tests via the Gradle wrappe
-
-
-      - name: Run tests
-        #run: kotlinc src/main/kotlin/org/example/MathUtilsTest.kt -include-runtime -d test.jar
+      - name: Compile with dependencies
         run: kotlinc src/main/kotlin/org/example/MathUtils.kt src/main/kotlin/org/example/test/MathUtilsTest.kt -include-runtime -d test.jar
+
+      - name: Run tests Jar
+        run: java -jar test.jar || exit 1

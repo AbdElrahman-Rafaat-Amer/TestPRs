@@ -28,7 +28,6 @@ jobs:
           ./gradlew test
 
       - name: Compile with dependencies (non-Gradle)
-        if: !exists('gradlew')
         run: |
           kotlinc \
             src/main/kotlin/org/example/MathUtils.kt \
@@ -38,5 +37,4 @@ jobs:
             -d test.jar
 
       - name: Run tests Jar (non-Gradle)
-        if: !exists('gradlew')
         run: java -jar test.jar || exit 1

@@ -14,7 +14,31 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Run Gradle tests (includes kotlinx-datetime)
+      - name: Run Gradle tests
         run: |
           chmod +x ./gradlew
           ./gradlew test
+
+      - name: Download dependencies
+        run: |
+          mkdir -p libs
+          cd libs
+          curl -L -O https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
+          cd ..
+
+      - name: Run Gradle tests
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test
+
+      - name: Compile with dependencies (non-Gradle)
+        run: |
+          kotlinc \
+            src/main/kotlin/org/example/MathUtils.kt \
+            src/main/kotlin/org/example/test/MathUtilsTest.kt \
+            -cp libs/kotlinx-datetime-0.4.1.jar \
+            -include-runtime \
+            -d test.jar
+
+      - name: Run tests Jar (non-Gradle)
+        run: java -jar test.jar || exit 1

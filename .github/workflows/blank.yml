@@ -1,4 +1,4 @@
-name: Kotlin PR Checks
+name: Kotlin PR Checks - blank file
 
 on: [pull_request]
 

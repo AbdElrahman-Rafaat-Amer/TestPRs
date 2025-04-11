@@ -8,38 +8,35 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: '17'
-#          distribution: 'temurin'
-
-#      - name: Install Kotlin compiler
-#        run: |
-#          curl -s https://get.sdkman.io | bash
-#          echo "$HOME/.sdkman/bin/sdkman-init.sh" >> $GITHUB_ENV
-#          source "$HOME/.sdkman/bin/sdkman-init.sh"
-#          sdk install kotlin
+      - name: Set up JDK (required for Gradle)
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Download dependencies
         run: |
-          mkdir -p libs && cd libs
+          mkdir -p libs
+          cd libs
           curl -L -O https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
+          cd ..
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+      - name: Run Gradle tests
+        if: exists('gradlew')
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test
 
-      - name: Run Gradle tests (if using Gradle)
-        run: ./gradlew test
-
-      - name: Compile with dependencies
+      - name: Compile with dependencies (non-Gradle)
+        if: !exists('gradlew')
         run: |
           kotlinc \
             src/main/kotlin/org/example/MathUtils.kt \
             src/main/kotlin/org/example/test/MathUtilsTest.kt \
-            -cp libs/kotlinx-datetime.jar \
+            -cp libs/kotlinx-datetime-0.4.1.jar \
             -include-runtime \
             -d test.jar
 
-      - name: Run tests Jar
+      - name: Run tests Jar (non-Gradle)
+        if: !exists('gradlew')
         run: java -jar test.jar || exit 1

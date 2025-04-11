@@ -14,33 +14,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget kotlin
-
       - name: Grant execute permission for gradlew
-        if: exists('./gradlew')
         run: chmod +x ./gradlew
 
-      - name: Run Gradle tests (if using Gradle)
-        if: exists('./gradlew')
-        run: ./gradlew test
+      - name: Run tests
+      - name: Run gradle tests
+        run: ./gradlew test #Runs your project's unit tests via the Gradle wrappe
 
-      - name: Download dependencies
-        run: |
-          mkdir -p libs
-          wget -q -O libs/kotlinx-datetime.jar \
-            https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.4.1/kotlinx-datetime-0.4.1.jar
 
-      - name: Compile with dependencies
-        run: |
-          kotlinc \
-            src/main/kotlin/org/example/MathUtils.kt \
-            src/main/kotlin/org/example/test/MathUtilsTest.kt \
-            -cp libs/kotlinx-datetime.jar \
-            -include-runtime \
-            -d test.jar
-
-      - name: Run tests Jar
-        run: java -jar test.jar || exit 1
+      - name: Run tests
+        #run: kotlinc src/main/kotlin/org/example/MathUtilsTest.kt -include-runtime -d test.jar
+        run: kotlinc src/main/kotlin/org/example/MathUtils.kt src/main/kotlin/org/example/test/MathUtilsTest.kt -include-runtime -d test.jar

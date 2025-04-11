@@ -14,12 +14,12 @@ jobs:
 #          java-version: '17'
 #          distribution: 'temurin'
 
-      - name: Install Kotlin compiler
-        run: |
-          curl -s https://get.sdkman.io | bash
-          echo "$HOME/.sdkman/bin/sdkman-init.sh" >> $GITHUB_ENV
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install kotlin
+#      - name: Install Kotlin compiler
+#        run: |
+#          curl -s https://get.sdkman.io | bash
+#          echo "$HOME/.sdkman/bin/sdkman-init.sh" >> $GITHUB_ENV
+#          source "$HOME/.sdkman/bin/sdkman-init.sh"
+#          sdk install kotlin
 
       - name: Download dependencies
         run: |
